@@ -7,38 +7,43 @@
  */
 int main(int argc __attribute__((unused)), char **argv)
 {
-	char **argTokes;
-	char **pathTokes;
 	ssize_t read;
+	size_t len;
 	/* int error; */
 	int (*bf_ptr)(void);
 
 	while (1)
 	{
+		errno = 0;
 		isInteractiveMode();
-		read = getline(&globes.line, &globes.line_len, stdin);
+		read = getline(&globes.line, &len, stdin);
 		if (read == -1)
 			break;
-		argTokes = createTokes(globes.line, read, " \n\t\r");
-		if (argTokes == NULL)
+		globes.argTokes = createTokes(globes.line, read, " \n\t\r");
+		if (globes.argTokes == NULL)
 		{
 			continue; /* ?? */
 		}
-		pathTokes = tokenizeEnvVar("PATH");
-		if (pathTokes == NULL)
+		globes.pathTokes = tokenizeEnvVar("PATH");
+		if (globes.pathTokes == NULL)
 		{
-			free(argTokes[-1]);
-			free(argTokes - 1);
+			freeTokes(globes.argTokes);
 			continue; /* ?? */
 		}
-		bf_ptr =  checkBuiltin(argTokes[0]);
-		if (bf_ptr == NULL)
-			handleCommand(argv, argTokes, pathTokes);
+		bf_ptr = checkBuiltin(globes.argTokes[0]);
+		if (bf_ptr != NULL)
+		{
+			globes.last_exit_status = bf_ptr();
+			freeTokes(globes.argTokes);
+			freeTokes(globes.pathTokes);
+		}
+		else
+			handleCommand(argv, globes.argTokes, globes.pathTokes);
 	}
 	if (read == -1)
 		write(STDERR_FILENO, "\n", 1);
 	free(globes.line);
-	exit(EXIT_FAILURE);
+	exit(globes.last_exit_status);
 }
 /**
  * isInteractiveMode - check for interactivity?
@@ -53,4 +58,14 @@ void isInteractiveMode(void)
 		globes.prompt_count++;
 	}
 
+}
+/**
+ *
+ *
+ * Return:
+ */
+void freeTokes(char **tokes)
+{
+	free(tokes[-1]);
+	free(tokes - 1);
 }

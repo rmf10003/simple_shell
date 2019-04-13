@@ -18,18 +18,19 @@ void handleCommand(char **argv, char **argTokes, char **pathTokes)
 	{
 		parser(argTokes, pathTokes);
 		execve(argTokes[0], argTokes, environ);
+		set_error();
 		perror(argv[0]);
-		free(argTokes[-1]);
-		free(argTokes - 1);
+		freeTokes(globes.argTokes);
 		free(globes.line);
-		exit(1);
+		exit(globes.last_exit_status);
 	}
 	else
+	{
 		wait(&status);
-	free(argTokes[-1]);
-	free(argTokes - 1);
-	free(pathTokes[-1]);
-	free(pathTokes - 1);
+		globes.last_exit_status = WEXITSTATUS(status);
+	}
+	freeTokes(globes.argTokes);
+	freeTokes(globes.pathTokes);
 
 }
 /**
@@ -70,6 +71,8 @@ void parser(char **argTokes, char **pathTokes)
 			}
 			break;
 		}
+		else
+			set_error();
 		free(full_path);
 	}
 	free(pathTokes[-1]);
