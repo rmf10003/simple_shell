@@ -10,12 +10,11 @@
 #include <errno.h>
 
 struct GlobalStruct {
-	char *path;
 	char *line;
-	size_t line_len;
-	char *cmd;
-	int *prev_status;
-	int *prompt_count;
+	char **pathTokes;
+	char **argTokes;
+	int last_exit_status;
+	int prompt_count;
 } globes;
 
 typedef struct builtin {
@@ -34,13 +33,14 @@ char *_getenv(const char *name);
 
 /* builtins and caller fctn */
 int (*checkBuiltin(char *cmd))(void);
-int exitB(char *str);
-int envB(char *cmd);
+int exitB(void);
+int envB(void);
 
 /* general use fctns */
 int _strcmp(char *s1, char *s2);
 size_t _strlen(char *str);
 char *_strcpy(char *dest, const char *src);
 char *str_concat(char *s1, char *s2);
-
+void freeTokes(char **tokes);
+void set_error(void);
 #endif

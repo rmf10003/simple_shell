@@ -9,8 +9,8 @@ int (*checkBuiltin(char *cmd))(void)
 {
 	int i = 0;
 	builtins s_spec[] = {
-		/* {"exit", exitB}, */
-		/* {"env", envB}, */
+		{"exit", exitB},
+		{"env", envB},
 		/* {"cd", cdB}, */
 		/* {"setenv", setenvB}, */
 		/* {"unsetenv", unsetenvB}, */
@@ -33,26 +33,18 @@ int (*checkBuiltin(char *cmd))(void)
  * @cmd: arg[0] from main
  * Return: 1 for success 0 for fail
  */
-/* int envB(char *cmd) */
-/* { */
-/* 	char *env = "env"; */
-/* 	char **cpy = environ; */
+int envB(void)
+{
+	char **cpy = environ;
 
-/* 	for (;*env == *cmd; env++, cmd++) */
-/* 	{ */
-/* 		if (*env == '\0' && *cmd == '\0') */
-/* 		{ */
-/* 			while (*cpy != NULL) */
-/* 			{ */
-/* 				write(1, (*cpy), _strlen(*cpy)); */
-/* 				write(1, "\n", 1); */
-/* 				cpy++; */
-/* 			} */
-/* 			return (1); */
-/* 		} */
-/* 	} */
-/* 	return (0); */
-/* } */
+	while (*cpy != NULL)
+	{
+		write(1, (*cpy), _strlen(*cpy));
+		write(1, "\n", 1);
+		cpy++;
+	}
+	return(0);
+}
 
 
 /**
@@ -60,7 +52,10 @@ int (*checkBuiltin(char *cmd))(void)
  * @str: check if "exit"
  * Return:1 on success
  */
-/* int exitB(char *str) */
-/* { */
-/* 	return (0); */
-/* } */
+int exitB(void)
+{
+	free(globes.line);
+	freeTokes(globes.argTokes);
+	freeTokes(globes.pathTokes);
+	exit(globes.last_exit_status);
+}
