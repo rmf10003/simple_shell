@@ -1,0 +1,15 @@
+.TH man 1 "09 Apr 2019" "1.0" "hsh man page"
+.SH NAME
+hsh \- command line interpreter (basic shell)
+.SH SYNOPSIS
+.B ./hsh
+.SH DESCRIPTION
+hsh is a command language interpreter that executes commands read from the stdin
+.SH OPTIONS
+No options taken
+.SH SEE ALSO
+Betty(1)
+.SH BUGS
+None known
+.SH AUTHORS
+Anthony Le & Rory Fahy
