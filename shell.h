@@ -10,6 +10,8 @@
 #include <errno.h>
 
 struct GlobalStruct {
+	char *argv0;
+	int argv0_len;
 	char *line;
 	char **pathTokes;
 	char **argTokes;
@@ -43,4 +45,8 @@ char *_strcpy(char *dest, const char *src);
 char *str_concat(char *s1, char *s2);
 void freeTokes(char **tokes);
 void set_error(void);
+char *_itoa(int num);
+void _rev(char *buff_boi_cpy);
+
+
 #endif

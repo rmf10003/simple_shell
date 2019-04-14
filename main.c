@@ -12,6 +12,9 @@ int main(int argc __attribute__((unused)), char **argv)
 	/* int error; */
 	int (*bf_ptr)(void);
 
+	globes.argv0 = *argv;
+	globes.argv0_len = _strlen(*argv);
+
 	while (1)
 	{
 		errno = 0;
