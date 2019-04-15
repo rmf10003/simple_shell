@@ -9,17 +9,22 @@
 void handleCommand(char **argv, char **argTokes, char **pathTokes)
 {
 	pid_t pid;
-	int status;
+	int status, p_success;
 
 	pid = fork();
 	if (pid == -1)
 		perror(argv[0]);
 	if (pid == 0)
 	{
-		parser(argTokes, pathTokes);
-		execve(argTokes[0], argTokes, environ);
-		set_error();
-		perror(argv[0]);
+		if ((p_success = parser(argTokes, pathTokes)) == 0)
+		{
+			execve(argTokes[0], argTokes, environ);
+			globes.error = errno;
+		}
+		errno = globes.error;
+		if (p_success != -2)
+			_error();
+		freeTokes(globes.pathTokes);
 		freeTokes(globes.argTokes);
 		free(globes.line);
 		exit(globes.last_exit_status);
@@ -41,22 +46,24 @@ void handleCommand(char **argv, char **argTokes, char **pathTokes)
  * Return: void
  */
 
-void parser(char **argTokes, char **pathTokes)
+int parser(char **argTokes, char **pathTokes)
 {
 	char *full_path, **cpy = pathTokes;
-	int i = 0;
+	int i, dir = 0;
 	struct stat st;
 
 	for (i = 0; (*argTokes)[i] != '\0'; i++)
 		if ((*argTokes)[i] == '/')
-			return;
+		{
+			/* execve(argTokes[0], argTokes, environ); */
+			return (0);
+		}
 	for (; *cpy != NULL; cpy++)
 	{
 		full_path = str_concat(*cpy, *argTokes);
 		if (full_path == NULL)
 		{
-			return;
-			/* do something */
+			return (-1);
 		}
 		if (stat(full_path, &st) == 0)
 		{
@@ -64,17 +71,22 @@ void parser(char **argTokes, char **pathTokes)
 			{
 			case S_IFDIR:
 				free(full_path);
+				dir = 1;
 				break;
 			default:
 				*argTokes = full_path;
+				/* execve(argTokes[0], argTokes, environ); */
 				break;
 			}
 			break;
 		}
-		else
-			set_error();
+		else if (errno == ENAMETOOLONG)
+			globes.error = errno;
 		free(full_path);
 	}
-	free(pathTokes[-1]);
-	free(pathTokes - 1);
+	if (*cpy == NULL)
+		return (-1);
+	if (dir)
+		return (-2);
+	return (0);
 }
