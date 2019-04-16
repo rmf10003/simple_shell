@@ -10,6 +10,7 @@
 #include <sys/wait.h>
 #include <errno.h>
  #include <signal.h>
+#define EILLEGALNUMB -2
 
 /**
  * struct GlobalStruct - contains all globals
@@ -77,7 +78,7 @@ int _pow(int x, int y);
 
 /* error handeling */
 char *create_perror_string(char *prompt_count, int pc_len);
-void print_error(char *errstr, char *prompt_count, int pc_len);
+void print_error(char *errstr, char *opt, char *prompt_count, int pc_len);
 void _error(void);
 
 #endif

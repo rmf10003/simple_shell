@@ -58,20 +58,23 @@ int exitB(void)
 
 	if (globes.argTokes[1] != NULL)
 	{
-		if (globes.argTokes[1][0] < '0' && globes.argTokes[1][0] > '9')
+		if (globes.argTokes[1][0] < '0' || globes.argTokes[1][0] > '9')
 			if (globes.argTokes[1][0] != '+')
 			{
+				errno = EILLEGALNUMB;
 				_error();
 				return (2);
 			}
 		for (; globes.argTokes[1][i]; i++)
 			if (globes.argTokes[1][i] < '0' && globes.argTokes[1][i] > '9')
 			{
+				errno = EILLEGALNUMB;
 				_error();
 				return (2);
 			}
 		if (_strlen(globes.argTokes[1]) > 11)
 		{
+			errno = EILLEGALNUMB;
 			_error();
 			return (2);
 		}
@@ -81,6 +84,7 @@ int exitB(void)
 			manual_exit = _atoi(globes.argTokes[1]);
 		if (manual_exit > INT_MAX)
 		{
+			errno = EILLEGALNUMB;
 			_error();
 			return (2);
 		}
@@ -89,10 +93,13 @@ int exitB(void)
 		freeTokes(globes.pathTokes);
 		exit(manual_exit & 0377);
 	}
-	free(globes.line);
-	freeTokes(globes.argTokes);
-	freeTokes(globes.pathTokes);
-	exit(globes.last_exit_status);
+	else
+	{
+		free(globes.line);
+		freeTokes(globes.argTokes);
+		freeTokes(globes.pathTokes);
+		exit(globes.last_exit_status);
+	}
 }
 
 /**
