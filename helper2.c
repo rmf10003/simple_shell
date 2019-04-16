@@ -1,10 +1,12 @@
 #include "shell.h"
+
 /**
  * _rev - reverse a string
  * @buff_boi_cpy: input string
  *
  * Return: nothing
  */
+
 void _rev(char *buff_boi_cpy)
 {
 	int i, j, k;
@@ -19,20 +21,20 @@ void _rev(char *buff_boi_cpy)
 		buff_boi_cpy[j] = temp;
 	}
 }
+
 /**
  * _itoa - convert integer to char array
  * @num: int to convert
- * @buff_boi: used to store converted char
- *
  * Return: string to be written
  */
+
 char *_itoa(int num)
 {
 	int i = 0;
 	int j = 0;
 	int r;
 	int rep = num;
-	char* buff_boi;
+	char *buff_boi;
 
 	buff_boi = malloc(120);
 	for (; j < 120; j++)

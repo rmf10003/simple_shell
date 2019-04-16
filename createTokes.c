@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * create_arg - tokenize str without damaging original string
+ * createTokes - tokenize str without damaging original string
  * Description: Create a copy of str, break copy into tokens,
  * store tokens in array args (null terminated)
  * @str: string to be tokenized

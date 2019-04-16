@@ -1,8 +1,8 @@
 #include "shell.h"
 /**
  * checkBuiltin - check for built in and run associated command
- * @
- * Return:
+ * @cmd: global argtok0
+ * Return: integer
  */
 
 int (*checkBuiltin(char *cmd))(void)
@@ -29,10 +29,11 @@ int (*checkBuiltin(char *cmd))(void)
 }
 
 /**
- * _envB - if command 'env' is passed print environ
- * @cmd: arg[0] from main
+ * envB - if command 'env' is passed print environ
+ * Description: print out environment list
  * Return: 1 for success 0 for fail
  */
+
 int envB(void)
 {
 	char **cpy = environ;
@@ -43,15 +44,14 @@ int envB(void)
 		write(1, "\n", 1);
 		cpy++;
 	}
-	return(0);
+	return (0);
 }
-
 
 /**
  * exitB - free allocated stuff and then exit
- * @str: check if "exit"
- * Return:1 on success
+ * Return: 1 on success
  */
+
 int exitB(void)
 {
 	int manual_exit, i = 1;

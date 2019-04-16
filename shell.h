@@ -22,7 +22,8 @@
  * @errstr: error string to pass to perror
  * @error: set to ENOENT standard bur changes if execve executes
  */
-struct GlobalStruct {
+struct GlobalStruct
+{
 	char *argv0;
 	int argv0_len;
 	char *line;
@@ -34,7 +35,14 @@ struct GlobalStruct {
 	int error;
 } globes;
 
-typedef struct builtin {
+/**
+ * struct builtin - struct for function pointers
+ * @str: str to compare
+ * @fptr: function pointer
+ */
+
+typedef struct builtin
+{
 	char *str;
 	int (*fptr)(void);
 } builtins;

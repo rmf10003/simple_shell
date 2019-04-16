@@ -1,9 +1,9 @@
 #include "shell.h"
+
 /**
- * set_error
- *
- * Return:
+ * _error - handle errors
  */
+
 void _error(void)
 {
 	char *prompt_count;
@@ -30,16 +30,17 @@ void _error(void)
 		if (globes.errstr != NULL)
 			free(globes.errstr);
 	}
-	free (prompt_count);
+	free(prompt_count);
 }
+
 /**
  * print_error - print proper error message
- * @errstr - error message
+ * @errstr: error message
  * @prompt_count: prompt count string
- * @pc_len: len of pc str
- *
+ * @pc_len: length of pc str
  * Return: void
  */
+
 void print_error(char *errstr, char *prompt_count, int pc_len)
 {
 	write(STDERR_FILENO, globes.argv0, globes.argv0_len);
@@ -50,11 +51,14 @@ void print_error(char *errstr, char *prompt_count, int pc_len)
 	write(STDERR_FILENO, ": ", 2);
 	write(STDERR_FILENO, errstr, _strlen(errstr));
 }
+
 /**
- * create_perror_string
- *
- * Return: void
+ * create_perror_string - stuff
+ * @prompt_count: prompt count string
+ * @pc_len: length of pc str
+ * Return: pointer to string
  */
+
 char *create_perror_string(char *prompt_count, int pc_len)
 {
 	int msize = 5;

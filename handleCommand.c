@@ -1,4 +1,5 @@
 #include "shell.h"
+
 /**
  * handleCommand - see if executable exists, if so runs it, if not handle error
  * @argv: initial hsh call and arguments passed through main
@@ -6,6 +7,7 @@
  * @pathTokes: tokenized copy of the path
  * Return: void??
  */
+
 void handleCommand(char **argv, char **argTokes, char **pathTokes)
 {
 	pid_t pid;
@@ -16,7 +18,8 @@ void handleCommand(char **argv, char **argTokes, char **pathTokes)
 		perror(argv[0]);
 	if (pid == 0)
 	{
-		if ((p_success = parser(argTokes, pathTokes)) == 0)
+		p_success = parser(argTokes, pathTokes);
+		if (p_success == 0)
 		{
 			execve(argTokes[0], argTokes, environ);
 			globes.error = errno;
@@ -38,10 +41,12 @@ void handleCommand(char **argv, char **argTokes, char **pathTokes)
 	freeTokes(globes.pathTokes);
 
 }
+
 /**
  * parser - point to "value" in PATH variable | format key=value
  * Description: Tokenize "value" in PATH, concatenate argTokes0 to tokens,
  * check if full_path exists and if it does, set argTokes0 to full_path
+ * @pathTokes: broken up path environmental variable
  * @argTokes: tokenized input from getline
  * Return: void
  */
@@ -54,24 +59,19 @@ int parser(char **argTokes, char **pathTokes)
 
 	for (i = 0; (*argTokes)[i] != '\0'; i++)
 		if ((*argTokes)[i] == '/')
-		{
 			/* execve(argTokes[0], argTokes, environ); */
 			return (0);
-		}
 	for (; *cpy != NULL; cpy++)
 	{
 		full_path = str_concat(*cpy, *argTokes);
 		if (full_path == NULL)
-		{
 			return (-1);
-		}
 		if (stat(full_path, &st) == 0)
 		{
 			switch (st.st_mode & S_IFMT)
 			{
 			case S_IFDIR:
-				free(full_path);
-				dir = 1;
+				free(full_path), dir = 1;
 				break;
 			default:
 				*argTokes = full_path;
