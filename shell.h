@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <limits.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
@@ -71,7 +72,8 @@ void freeTokes(char **tokes);
 char *_itoa(int num);
 void _rev(char *buff_boi_cpy);
 char *_strcat(char *dest, char *src);
-
+int _atoi(char *str);
+int _pow(int x, int y);
 
 /* error handeling */
 char *create_perror_string(char *prompt_count, int pc_len);
