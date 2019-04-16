@@ -54,6 +54,23 @@ int envB(void)
  */
 int exitB(void)
 {
+	int manual_exit, i = 1;
+
+	if (globes.argTokes[1] != NULL)
+	{
+		if (globes.argTokes[1][0] < '0' globes.argTokes[1][0] > '9')
+			if (globes.argTokes[1][0] != '+')
+				return (2);
+		for (; globes.argTokes[1][i]; i++)
+			if (globes.argTokes[1][i] < '0' globes.argTokes[1][i] > '9')
+				return (2);
+		if (_strlen(globes.argTokes[1]) > 11)
+			return (2);
+		if (globes.argTokes[1][0] == '+')
+			manual_exit = _atoi(*(globes.argTokes + 1) + 1);
+		else
+			manual_exit = _atoi(*globes.argTokes);
+	}
 	free(globes.line);
 	freeTokes(globes.argTokes);
 	freeTokes(globes.pathTokes);
