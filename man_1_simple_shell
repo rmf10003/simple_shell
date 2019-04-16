@@ -1,6 +1,6 @@
 .TH man 1 "09 Apr 2019" "1.0" "hsh man page"
 .SH NAME
-hsh \- command line interpreter (basic shell)
+hsh \- command line interpreter
 .SH SYNOPSIS
 .B ./hsh
 .SH DESCRIPTION
