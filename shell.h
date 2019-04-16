@@ -72,7 +72,7 @@ void freeTokes(char **tokes);
 char *_itoa(int num);
 void _rev(char *buff_boi_cpy);
 char *_strcat(char *dest, char *src);
-int _atoi(char *str);
+long int _atoi(char *str);
 int _pow(int x, int y);
 
 /* error handeling */

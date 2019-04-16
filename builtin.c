@@ -76,9 +76,9 @@ int exitB(void)
 			return (2);
 		}
 		if (globes.argTokes[1][0] == '+')
-			manual_exit = _atoi(*(globes.argTokes + 1) + 1);
+			manual_exit = _atoi(&globes.argTokes[1][1]);
 		else
-			manual_exit = _atoi(*globes.argTokes);
+			manual_exit = _atoi(globes.argTokes[1]);
 		if (manual_exit > INT_MAX)
 		{
 			_error();
@@ -101,16 +101,17 @@ int exitB(void)
  *
  * Return: integer rep of char str
  */
-int _atoi(char *str)
+long int _atoi(char *str)
 {
-	int exit_status = 0;
-	int i = -1;
+	long int exit_status = 0;
+	int i = 0;
 	char *cpy = str;
 
 	for (; cpy[i]; i++)
 		;
+	i--;
 	for (; *cpy; cpy++, i--)
-		exit_status += (*str - '0') * _pow(10, i);
+		exit_status += (*cpy - '0') * _pow(10, i);
 	return (exit_status);
 }
 /**
