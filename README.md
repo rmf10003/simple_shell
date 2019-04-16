@@ -13,4 +13,8 @@ This project was to make really understand what we have used everyday to create 
 ## How to use?
 Run commands as if in sh or bash.
 
+Example 1: ls -l
+Example 2: /bin/ls
+Example 3: echo Hello World
+
 Holberton School © [Anthony Le]() [Rory Fayh]()
