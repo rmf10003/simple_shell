@@ -1,10 +1,12 @@
 #include "shell.h"
+
 /**
  * main - hsh
  * @argc: arg count
  * @argv: arg vector
  * Return: EXIT_FAILURE
  */
+
 int main(int argc __attribute__((unused)), char **argv)
 {
 	ssize_t read;
@@ -47,11 +49,13 @@ int main(int argc __attribute__((unused)), char **argv)
 	free(globes.line);
 	exit(globes.last_exit_status);
 }
+
 /**
  * isInteractiveMode - check for interactivity?
  *
  * Return:
  */
+
 void isInteractiveMode(void)
 {
 	if (isatty(STDOUT_FILENO) && isatty(STDIN_FILENO))
@@ -61,21 +65,26 @@ void isInteractiveMode(void)
 	}
 
 }
+
 /**
- *
- *
- * Return:
+ * freeTokes - stuff
+ * Description: stuff
+ * @tokes: free tokens
+ * Return: void
  */
+
 void freeTokes(char **tokes)
 {
 	free(tokes[-1]);
 	free(tokes - 1);
 }
+
 /**
- * signal_handler -  
- *
- * Return:
+ * signal_handler - handle signal
+ * @sig: SIGINT
+ * Return: void
  */
+
 void signal_handler(int sig __attribute__((unused)))
 {
 	write(STDERR_FILENO, "\n$ ", 3);

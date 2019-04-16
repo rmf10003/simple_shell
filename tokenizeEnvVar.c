@@ -1,10 +1,11 @@
 #include "shell.h"
+
 /**
  * tokenizeEnvVar - tokenize specified env variable
- * var - environmental variable
- *
+ * @var: environmental variable
  * Return: array of tokenized strings
  */
+
 char **tokenizeEnvVar(char *var)
 {
 	char **tokes;
