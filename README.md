@@ -16,5 +16,6 @@ Run commands as if in sh or bash.
 Example 1: ls -l
 Example 2: /bin/ls
 Example 3: echo Hello World
+Example 4: cat myfile.txt
 
 Holberton School © [Anthony Le]() [Rory Fayh]()
