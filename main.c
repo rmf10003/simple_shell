@@ -9,15 +9,14 @@ int main(int argc __attribute__((unused)), char **argv)
 {
 	ssize_t read;
 	size_t len;
-	/* int error; */
 	int (*bf_ptr)(void);
 
+	globes.error = ENOENT;
 	globes.argv0 = *argv;
 	globes.argv0_len = _strlen(*argv);
-
+	signal(SIGINT, &signal_handler);
 	while (1)
 	{
-		errno = 0;
 		isInteractiveMode();
 		read = getline(&globes.line, &len, stdin);
 		if (read == -1)
@@ -71,4 +70,13 @@ void freeTokes(char **tokes)
 {
 	free(tokes[-1]);
 	free(tokes - 1);
+}
+/**
+ * signal_handler -  
+ *
+ * Return:
+ */
+void signal_handler(int sig __attribute__((unused)))
+{
+	write(STDERR_FILENO, "\n$ ", 3);
 }

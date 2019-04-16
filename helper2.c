@@ -29,11 +29,14 @@ void _rev(char *buff_boi_cpy)
 char *_itoa(int num)
 {
 	int i = 0;
+	int j = 0;
 	int r;
 	int rep = num;
 	char* buff_boi;
 
 	buff_boi = malloc(120);
+	for (; j < 120; j++)
+		buff_boi[j] = '\0';
 	if (buff_boi == NULL)
 		return (NULL);
 	if (num < 0)
