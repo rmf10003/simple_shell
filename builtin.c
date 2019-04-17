@@ -40,8 +40,8 @@ int envB(void)
 
 	while (*cpy != NULL)
 	{
-		write(1, (*cpy), _strlen(*cpy));
-		write(1, "\n", 1);
+		write(STDOUT_FILENO, (*cpy), _strlen(*cpy));
+		write(STDOUT_FILENO, "\n", 1);
 		cpy++;
 	}
 	return (0);
