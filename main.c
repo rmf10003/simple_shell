@@ -23,6 +23,7 @@ int main(int argc __attribute__((unused)), char **argv)
 		read = getline(&globes.line, &len, stdin);
 		if (read == -1)
 			break;
+		globes.prompt_count++;
 		globes.argTokes = createTokes(globes.line, read, " \n\t\r");
 		if (globes.argTokes == NULL)
 		{
@@ -44,7 +45,7 @@ int main(int argc __attribute__((unused)), char **argv)
 		else
 			handleCommand(argv, globes.argTokes, globes.pathTokes);
 	}
-	if (read == -1)
+	if (read == -1 && globes.interactive)
 		write(STDERR_FILENO, "\n", 1);
 	free(globes.line);
 	exit(globes.last_exit_status);
@@ -60,8 +61,8 @@ void isInteractiveMode(void)
 {
 	if (isatty(STDOUT_FILENO) && isatty(STDIN_FILENO))
 	{
-		write(STDERR_FILENO, "($) ", 4); /* change prompt */
-		globes.prompt_count++;
+		globes.interactive = 1;
+		write(STDERR_FILENO, "$ ", 2); /* change prompt */
 	}
 
 }

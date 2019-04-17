@@ -23,6 +23,7 @@
  * @prompt_count: prompt count
  * @errstr: error string to pass to perror
  * @error: set to ENOENT standard bur changes if execve executes
+ * @interactive: flag to check interactivity
  */
 struct GlobalStruct
 {
@@ -35,6 +36,7 @@ struct GlobalStruct
 	int prompt_count;
 	char *errstr;
 	int error;
+	int interactive;
 } globes;
 
 /**
