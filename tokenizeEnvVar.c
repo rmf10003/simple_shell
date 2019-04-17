@@ -14,7 +14,7 @@ char **tokenizeEnvVar(char *var)
 
 	var_str = _getenv(var);
 
-	len = strlen(var_str);
+	len = _strlen(var_str);
 	tokes = createTokes(var_str, len, ":");
 	return (tokes);
 }
