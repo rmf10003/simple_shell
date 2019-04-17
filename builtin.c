@@ -61,21 +61,18 @@ int exitB(void)
 		if (globes.argTokes[1][0] < '0' || globes.argTokes[1][0] > '9')
 			if (globes.argTokes[1][0] != '+')
 			{
-				errno = EILLEGALNUMB;
-				_error();
+				errno = EILLEGALNUMB, _error();
 				return (2);
 			}
 		for (; globes.argTokes[1][i]; i++)
 			if (globes.argTokes[1][i] < '0' && globes.argTokes[1][i] > '9')
 			{
-				errno = EILLEGALNUMB;
-				_error();
+				errno = EILLEGALNUMB, _error();
 				return (2);
 			}
 		if (_strlen(globes.argTokes[1]) > 11)
 		{
-			errno = EILLEGALNUMB;
-			_error();
+			errno = EILLEGALNUMB, _error();
 			return (2);
 		}
 		if (globes.argTokes[1][0] == '+')
@@ -84,24 +81,29 @@ int exitB(void)
 			manual_exit = _atoi(globes.argTokes[1]);
 		if (manual_exit > 2147483647l)
 		{
-			errno = EILLEGALNUMB;
-			_error();
+			errno = EILLEGALNUMB, _error();
 			return (2);
 		}
-		free(globes.line);
-		freeTokes(globes.argTokes);
-		freeTokes(globes.pathTokes);
+		sillyFree();
 		exit(manual_exit & 0377);
 	}
 	else
 	{
-		free(globes.line);
-		freeTokes(globes.argTokes);
-		freeTokes(globes.pathTokes);
+		sillyFree();
 		exit(globes.last_exit_status);
 	}
 }
-
+/**
+ * sillyFree - only purpose is to reduce 4 lines to make code betty compliant
+ *
+ * Return: void
+ */
+void sillyFree(void)
+{
+	free(globes.line);
+	freeTokes(globes.argTokes);
+	freeTokes(globes.pathTokes);
+}
 /**
  * _atoi - convert a char array into an int
  * @str: char string to convert
