@@ -51,6 +51,7 @@ typedef struct builtin
 
 extern char **environ;
 
+void sillyFree(void);
 char **tokenizeEnvVar(char *var);
 void isInteractiveMode(void);
 void handleCommand(char **argv, char **argTokes, char **pathTokes);
