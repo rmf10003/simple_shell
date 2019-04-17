@@ -25,13 +25,13 @@ char **createTokes(char *str, ssize_t size, char *delim)
 		return (NULL);
 	}
 	_strcpy(cpy, str), _strcpy(cpy2, str);
-	token = strtok(cpy2, delim);
+	token = _strtok(cpy2, delim);
 	for (numPtrs = 2; token; numPtrs++)
 	{
 		if (*token == '#')
 			break;
-		token = strtok(NULL, delim);
-	}
+		token = _strtok(NULL, delim);
+       	}
 	if (numPtrs == 2)
 	{
 		free(cpy), free(cpy2);
@@ -44,11 +44,11 @@ char **createTokes(char *str, ssize_t size, char *delim)
 		free(cpy);
 		return (NULL);
 	}
-	*tokenArr++ = cpy, token = strtok(cpy, delim);
+	*tokenArr++ = cpy, token = _strtok(cpy, delim);
 	for (i = 0; i < (numPtrs - 2); i++)
 	{
 		tokenArr[i] = token;
-		token = strtok(NULL, delim);
+		token = _strtok(NULL, delim);
 	}
 	tokenArr[i] = NULL;
 	return (tokenArr);
