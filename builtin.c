@@ -54,7 +54,7 @@ int envB(void)
 
 int exitB(void)
 {
-	int manual_exit, i = 1;
+	long int manual_exit, i = 1;
 
 	if (globes.argTokes[1] != NULL)
 	{
@@ -82,7 +82,7 @@ int exitB(void)
 			manual_exit = _atoi(&globes.argTokes[1][1]);
 		else
 			manual_exit = _atoi(globes.argTokes[1]);
-		if (manual_exit > INT_MAX)
+		if (manual_exit > 2147483647l)
 		{
 			errno = EILLEGALNUMB;
 			_error();
@@ -128,7 +128,7 @@ long int _atoi(char *str)
  *
  * Return: val of x raised to y
  */
-int _pow(int x, int y)
+long int _pow(int x, int y)
 {
 	if (y < 0)
 		return (-1);

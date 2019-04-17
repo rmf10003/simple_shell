@@ -74,7 +74,7 @@ char *_itoa(int num);
 void _rev(char *buff_boi_cpy);
 char *_strcat(char *dest, char *src);
 long int _atoi(char *str);
-int _pow(int x, int y);
+long int _pow(int x, int y);
 
 /* error handeling */
 char *create_perror_string(char *prompt_count, int pc_len);
