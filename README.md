@@ -30,6 +30,6 @@ Run commands as if in sh or bash.
 - Example 3: echo Hello World
 - Example 4: cat myfile.txt
 - Example 5: emacs myfile.txt
-
+- Example 6: echo Emacs > Vim > Vi > Nano
 
 Holberton School © [Anthony Le]() [Rory Fayh]()

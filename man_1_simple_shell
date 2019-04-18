@@ -2,15 +2,25 @@
 .SH NAME
 hsh \- command line interpreter
 .SH SYNOPSIS
-.B Usage ff not compiled
-gcc -Wall -pedantic -Werror -Wextra *.c
-.B I
+.B Usage if not compiled
+
+Step 1: gcc -Wall -pedantic -Werror -Wextra *.c
+
+Step 2: ./hsh
+
+.B If compiled
+
+Step 1: ./hsh
 .SH DESCRIPTION
 hsh is a command language interpreter that executes commands read from the standard input. Functionalities include arguments, PATH parser, CTRL+C signal block, exit built-in with correct exit statuses, and comments.
+.SH HELPER FUNCTIONS
+.B _strcpy, _strlen, _str_concat, _strcmp, _strcat, _rev, _itoa
 .SH OPTIONS
-No options taken.
+No options taken at start of shell. Options are functional for commands within shell similar to bash.
+.SH EXIT STATUS
+hsh will return the appropriate exit status and set errno appropriately upon exit.
 .SH SEE ALSO
-Betty(1)
+Betty(2), dash(1), sh(1)
 .SH BUGS
 None known.
 .SH AUTHORS
