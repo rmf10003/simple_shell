@@ -13,9 +13,7 @@ int main(int argc __attribute__((unused)), char **argv)
 	size_t len;
 	int (*bf_ptr)(void);
 
-	globes.error = ENOENT;
-	globes.argv0 = *argv;
-	globes.argv0_len = _strlen(*argv);
+	startup(argv);
 	signal(SIGINT, &signal_handler);
 	while (1)
 	{
@@ -32,6 +30,8 @@ int main(int argc __attribute__((unused)), char **argv)
 		globes.pathTokes = tokenizeEnvVar("PATH");
 		if (globes.pathTokes == NULL)
 		{
+			errno = ENOENT;
+			_error();
 			freeTokes(globes.argTokes);
 			continue; /* ?? */
 		}
@@ -89,4 +89,15 @@ void freeTokes(char **tokes)
 void signal_handler(int sig __attribute__((unused)))
 {
 	write(STDERR_FILENO, "\n$ ", 3);
+}
+/**
+ * startup - set some globals
+ * @argv: args passed from bash
+ * Return: void
+ */
+void startup(char **argv)
+{
+	globes.error = ENOENT;
+	globes.argv0 = *argv;
+	globes.argv0_len = _strlen(*argv);
 }

@@ -53,6 +53,7 @@ typedef struct builtin
 
 extern char **environ;
 
+void startup(char **argv);
 char *_strtok(char *str, char *delim);
 void sillyFree(void);
 char **tokenizeEnvVar(char *var);

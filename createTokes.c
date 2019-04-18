@@ -31,7 +31,7 @@ char **createTokes(char *str, ssize_t size, char *delim)
 		if (*token == '#')
 			break;
 		token = _strtok(NULL, delim);
-       	}
+	}
 	if (numPtrs == 2)
 	{
 		free(cpy), free(cpy2);

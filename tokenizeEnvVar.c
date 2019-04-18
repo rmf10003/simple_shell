@@ -13,7 +13,6 @@ char **tokenizeEnvVar(char *var)
 	int len;
 
 	var_str = _getenv(var);
-
 	len = _strlen(var_str);
 	tokes = createTokes(var_str, len, ":");
 	return (tokes);
