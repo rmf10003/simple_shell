@@ -2,14 +2,16 @@
 .SH NAME
 hsh \- command line interpreter
 .SH SYNOPSIS
-.B ./hsh
+.B Usage ff not compiled
+gcc -Wall -pedantic -Werror -Wextra *.c
+.B I
 .SH DESCRIPTION
-hsh is a command language interpreter that executes commands read from the stdin
+hsh is a command language interpreter that executes commands read from the standard input. Functionalities include arguments, PATH parser, CTRL+C signal block, exit built-in with correct exit statuses, and comments.
 .SH OPTIONS
-No options taken
+No options taken.
 .SH SEE ALSO
 Betty(1)
 .SH BUGS
-None known
+None known.
 .SH AUTHORS
 Anthony Le & Rory Fahy
