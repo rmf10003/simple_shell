@@ -2,7 +2,7 @@
 Create a shell similar to sh in terms of functionality and looks. This is a collaborative project between two students to test their knowledge, technical skill, communication skills, and resourcefulness. Shell Project is the final project of the first trimester at Holberton School.
 
 ## Motivation
-This project was have us really understand what we have used every day to complete our tasks. We tend to forget how important something is when we use and/or see it so often. Coding a shell made us really appreciate all the little things the shell does for us day in day out.
+This project was have us really understand what we have used every day to complete our tasks. We tend to forget how important something is when we use and/or see it so often. Coding a shell made us really appreciate all the little things the shell does for us day in day out. We really appreciate this assignment.
 
  ## Screenshots
  ![Example](https://i.imgur.com/iCw0PMT.png)
