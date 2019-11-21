@@ -52,9 +52,9 @@ int main(int argc __attribute__((unused)), char **argv)
 }
 
 /**
- * isInteractiveMode - check for interactivity?
+ * isInteractiveMode - check if program is run in interactive or non-interactive mode
  *
- * Return:
+ * Return: void
  */
 
 void isInteractiveMode(void)
@@ -81,7 +81,7 @@ void freeTokes(char **tokes)
 }
 
 /**
- * signal_handler - handle signal
+ * signal_handler - handle signals i.e. ctrl-C
  * @sig: SIGINT
  * Return: void
  */
